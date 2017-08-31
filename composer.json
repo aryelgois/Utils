@@ -1,0 +1,20 @@
+{
+    "name": "aryelgois/Utils",
+    "description": "Useful methods for not repeating myself",
+    "keywords": ["utils"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aryel Mota Góis",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "aryelgois\\Utils\\": "src/"
+        }
+    }
+}
