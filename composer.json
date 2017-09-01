@@ -1,5 +1,5 @@
 {
-    "name": "aryelgois/Utils",
+    "name": "aryelgois/utils",
     "description": "Useful methods for not repeating myself",
     "keywords": ["utils"],
     "license": "MIT",
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "aryelgois\\Utils\\": "src/"
+            "aryelgois\\utils\\": "src/"
         }
     }
 }
