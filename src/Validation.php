@@ -13,7 +13,7 @@ namespace aryelgois\utils;
  * @author Aryel Mota Góis
  * @license MIT
  * @link https://www.github.com/aryelgois/utils
- * @version 0.1
+ * @version 0.1.1
  */
 class Validation
 {
@@ -224,7 +224,7 @@ class Validation
      *
      * @see http://en.wikipedia.org/wiki/Luhn_algorithm
      */
-    protected static function mod10($number)
+    public static function mod10($number)
     {
         $checksum = '';
         foreach (str_split(strrev((string) $number)) as $i => $d) {
@@ -244,7 +244,8 @@ class Validation
      *
      * @return integer
      */
-    protected static function mod11($number, $base = 9) {
+    public static function mod11($number, $base = 9)
+    {
         $checksum = 0;
         $factor = 2;
         foreach (str_split(strrev((string) $number)) as $d) {
