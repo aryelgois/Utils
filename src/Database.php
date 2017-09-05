@@ -16,7 +16,7 @@ namespace aryelgois\utils;
  * @author Aryel Mota Góis
  * @license MIT
  * @link https://www.github.com/aryelgois/utils
- * @version 1.0
+ * @version 0.1
  */
 abstract class Database
 {
