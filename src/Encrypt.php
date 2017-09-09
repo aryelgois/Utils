@@ -1,21 +1,18 @@
 <?php
 /**
- * This Software is part of aryelgois\utils and is provided "as is".
+ * This Software is part of aryelgois\Utils and is provided "as is".
  *
  * @see LICENSE
  */
 
-namespace aryelgois\utils;
-
-use Utils;
+namespace aryelgois\Utils;
 
 /**
  * Encryptation functions
  *
  * @author Aryel Mota Góis
  * @license MIT
- * @link https://www.github.com/aryelgois/utils
- * @version 0.1
+ * @link https://www.github.com/aryelgois/Utils
  */
 class Encrypt
 {
