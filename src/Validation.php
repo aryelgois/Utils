@@ -245,6 +245,21 @@ class Validation
      */
     public static function mod11($number, $base = 9)
     {
+        return (self::mod11Pre($number, $base) % 11);
+    }
+    
+    /**
+     * Calculates modulus 11 but do not apply the modulus
+     *
+     * Useful when some calculation is required before '% 11'
+     *
+     * @param mixed   $number Numeric value whose check digit will be calculated
+     * @param integer $base   Maximum multiplication value
+     *
+     * @return integer
+     */
+    public static function mod11Pre($number, $base = 9)
+    {
         $checksum = 0;
         $factor = 2;
         foreach (str_split(strrev((string) $number)) as $d) {
@@ -253,6 +268,6 @@ class Validation
                 $factor = 2;
             }
         }
-        return $checksum % 11;
+        return $checksum;
     }
 }
