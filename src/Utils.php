@@ -112,6 +112,58 @@ class Utils
     
     
     /*
+     * Array
+     * =========================================================================
+     */
+    
+    
+    /**
+     * Merges two or more arrays in a zipper style:
+     *
+     * If array length is not equal, those missing will be skipped.
+     * In the end, all values will be in returned array.
+     *
+     * It is possible to pass a string, whose characters will be treated as
+     * single values, so the return would be an array of characters.
+     *
+     * Examples:
+     * - [$a[0], $b[0], $a[1], $b[1], ...]
+     * - [$a[0], $b[0], $c[0], $a[1], $b[1], $c[1], ...]
+     * - [$a[0], $b[0], $c[0], $a[1], $c[1]]             // b is shorter
+     * - [$a[0], $b[0], $c[0], $a[1]]                    // a is longer
+     *
+     * @param mixed[] $arrays Arrays or Strings (multiple parameters)
+     *
+     * @return array
+     */
+    protected static function arrayInterpolate(...$arrays)
+    {
+        if (count($arrays) == 0) {
+            return [];
+        }
+        $len = $result = [];
+        
+        // Determine longest array and cache lengths
+        foreach ($arrays as $array) {
+            $len[] = (is_string($array))
+                ? strlen($array)
+                : count($array);
+        }
+        $max = max($len);
+        
+        // Interpolate values
+        for ($i = 0; $i < $max; $i++) {
+            foreach ($arrays as $current => $array) {
+                if ($len[$current] >= $i + 1) {
+                    $result[] = $array[$i];
+                }
+            }
+        }
+        return $result;
+    }
+    
+    
+    /*
      * Recursive
      * =========================================================================
      */
