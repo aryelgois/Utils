@@ -136,7 +136,7 @@ class Utils
      *
      * @return array
      */
-    protected static function arrayInterpolate(...$arrays)
+    public static function arrayInterpolate(...$arrays)
     {
         if (count($arrays) == 0) {
             return [];
