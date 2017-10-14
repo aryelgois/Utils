@@ -115,6 +115,7 @@ class Utils
      *
      * @author Tim Boormans <info@directwebsolutions.nl>
      * @link   http://php.net/manual/en/function.ctype-digit.php#108712
+     * @see    http://php.net/manual/en/function.ctype-digit.php#118098
      *
      * @param mixed $digit
      *
@@ -122,7 +123,7 @@ class Utils
      */
     public static function isDigit($digit)
     {
-        if (is_int($digit)) {
+        if (is_int($digit) && $digit >= 0) {
             return true;
         } elseif (is_string($digit)) {
             return ctype_digit($digit);
