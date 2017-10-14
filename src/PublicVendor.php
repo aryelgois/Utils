@@ -12,7 +12,7 @@ use Composer\Script\Event;
 /**
  * Configure public vendors easily
  *
- * Useful when a package dependency has JavaScript or CSS which should be under
+ * Useful when a package dependency has front-end files which should be under
  * base_dir/public instead of base_dir/vendor
  *
  * @author Aryel Mota Góis
