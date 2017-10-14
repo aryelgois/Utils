@@ -20,8 +20,8 @@ class Validation
      * Clean up
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Sanitizes a string
      *
@@ -33,7 +33,7 @@ class Validation
     {
         return htmlspecialchars(stripslashes(trim($str)));
     }
-    
+
     /**
      * Sanitizes all strings of an array
      *
@@ -47,14 +47,14 @@ class Validation
             }
         }
     }
-    
-    
+
+
     /*
      * Specific cases
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Validates address numbers
      *
@@ -72,7 +72,7 @@ class Validation
         }
         return false;
     }
-    
+
     /**
      * Validates Brazilian CEP
      *
@@ -87,7 +87,7 @@ class Validation
         }
         return false;
     }
-    
+
     /**
      * Validates Brazilian CNPJ
      *
@@ -99,12 +99,12 @@ class Validation
     {
         // Extract numbers
         $cnpj = preg_replace('/[^\d]/', '', $cnpj);
-        
+
         // Check amount of numbers
         if (strlen($cnpj) != 14) {
             return false;
         }
-        
+
         // Calculate check digits
         $cd = [11 - self::mod11($cnpj)];
         $cd[] = 11 - self::mod11($cnpj . $cd[0]);
@@ -114,14 +114,14 @@ class Validation
         if ($cd[1] >= 10) {
             $cd[1] = 0;
         }
-        
+
         // Verify
         if ($cd[0] == $cnpj[12] && $cd[1] == $cnpj[13]) {
             return $cnpj;
         }
         return false;
     }
-    
+
     /**
      * Validate Brazilian CPF
      *
@@ -136,17 +136,17 @@ class Validation
     {
         // Extract numbers
         $cpf = preg_replace('/[^\d]/', '', $cpf);
-        
+
         // Check amount of numbers
         if (strlen($cpf) != 11) {
             return false;
         }
-        
+
         // Check for digit sequence
         if (preg_match('/(\d)\1{10}/', $cpf)) {
             return false;
         }
-        
+
         // Calculate check digits
         for ($t = 9; $t < 11; $t++) {
             for ($d = 0, $c = 0; $c < $t; $c++) {
@@ -157,10 +157,10 @@ class Validation
                 return false;
             }
         }
-        
+
         return $cpf;
     }
-    
+
     /**
      * Validates a date
      *
@@ -174,7 +174,7 @@ class Validation
         $d = \DateTime::createFromFormat($format, $date);
         return ($d && $d->format($format) == $date);
     }
-    
+
     /**
      * Validates a date time
      *
@@ -189,7 +189,7 @@ class Validation
     {
         return self::date($datetime, $format);
     }
-    
+
     /**
      * Validates a telephone/cell phone number
      *
@@ -206,14 +206,14 @@ class Validation
         }
         return false;
     }
-    
-    
+
+
     /*
      * Helper
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Luhn algorithm (modulus 10)
      *
@@ -231,7 +231,7 @@ class Validation
         }
         return array_sum(str_split($checksum)) * 9 % 10;
     }
-    
+
     /**
      * Calculates modulus 11 to generate a check digit
      *
@@ -247,7 +247,7 @@ class Validation
     {
         return (self::mod11Pre($number, $base) % 11);
     }
-    
+
     /**
      * Calculates modulus 11 but do not apply the modulus
      *

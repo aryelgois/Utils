@@ -30,7 +30,7 @@ class Format
         'Sexta',
         'Sábado'
     ];
-    
+
     /**
      * Months in Portuguese
      *
@@ -50,7 +50,7 @@ class Format
         'Novembro',
         'Dezembro'
     ];
-    
+
     /**
      * Formats Brazilian CNPJ
      *
@@ -66,7 +66,7 @@ class Format
              . substr($cnpj, 8, 4) . '-'
              . substr($cnpj, 12, 2);
     }
-    
+
     /**
      * Formats Brazilian CPF
      *
@@ -81,7 +81,7 @@ class Format
              . substr($cpf, 6, 3) . '-'
              . substr($cpf, 9, 2);
     }
-    
+
     /**
      * Formats any date into date('j \d\e F \d\e Y')
      *
@@ -104,7 +104,7 @@ class Format
         $d[1] = self::MONTHS[$d[1] - 1];
         return implode(' de ', $d);
     }
-    
+
     /**
      * Formats two dates to represent a range
      *
@@ -133,7 +133,7 @@ class Format
         $glue = (strtotime('+ 1 day', $date0) == $date1 ? ' e ' : ' a ');
         return $prefix . implode($glue, $range);
     }
-    
+
     /**
      * Formats money value based in a country code
      *
@@ -154,7 +154,7 @@ class Format
         }
         return ($arr[0] . ' ' . number_format($val, 2, $arr[2], $arr[1]));
     }
-    
+
     /**
      * Human readable filesize()
      *
@@ -173,7 +173,7 @@ class Format
         $size = 'BKMGTP';
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
-    
+
     /**
      * Implodes an array with ',' and 'and' before last element
      *
@@ -190,7 +190,7 @@ class Format
         }
         return $last;
     }
-    
+
     /**
      * Indents a multiline string, adding spaces after every "\n"
      *
@@ -207,7 +207,7 @@ class Format
     {
         return str_replace("\n", "\n" . str_repeat(' ', $indent * $tab), $str);
     }
-    
+
     /**
      * Replaces the first occurence in a string
      *
@@ -224,7 +224,7 @@ class Format
             return substr_replace($subject, $replace, $pos, strlen($search));
         return $subject;
     }
-    
+
     /**
      * Replaces keys of an array by its values in a string
      *

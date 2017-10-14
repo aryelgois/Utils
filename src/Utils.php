@@ -20,8 +20,8 @@ class Utils
      * Debugging
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Exports a value, wrapping in <pre><code>, and echo.
      *
@@ -31,14 +31,14 @@ class Utils
     {
         echo "<pre><code>\n" . var_export($val, true) . "\n</code></pre>\n";
     }
-    
-    
+
+
     /*
      * Numbers
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Compares if a value is between a minimum and maximum value.
      *
@@ -70,7 +70,7 @@ class Utils
                 return ($val >= $min && $val <= $max);
         }
     }
-    
+
     /**
      * Limits a value to a minimum and maximum boundaries.
      *
@@ -84,7 +84,7 @@ class Utils
     {
         return ($val > $min ? ($val < $max ? $val : $max) : $min);
     }
-    
+
     /**
      * Limits a value to a minimum and maximum boundaries, wrapping the overflow.
      *
@@ -109,14 +109,14 @@ class Utils
         }
         return $val;
     }
-    
-    
+
+
     /*
      * Array
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Merges two or more arrays in a zipper style:
      *
@@ -142,7 +142,7 @@ class Utils
             return [];
         }
         $len = $result = [];
-        
+
         // Determine longest array and cache lengths
         foreach ($arrays as $array) {
             $len[] = (is_string($array))
@@ -150,7 +150,7 @@ class Utils
                 : count($array);
         }
         $max = max($len);
-        
+
         // Interpolate values
         for ($i = 0; $i < $max; $i++) {
             foreach ($arrays as $current => $array) {
@@ -161,14 +161,14 @@ class Utils
         }
         return $result;
     }
-    
-    
+
+
     /*
      * Recursive
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Recursively searches an array for a value.
      *
@@ -190,7 +190,7 @@ class Utils
         }
         return false;
     }
-    
+
     /**
      * Recursively sorts the keys of an array.
      *
@@ -212,7 +212,7 @@ class Utils
         }
         return true;
     }
-    
+
     /**
      * Recursively lists files and directories inside the specific path.
      *
@@ -234,14 +234,14 @@ class Utils
         }
         return $arr;
     }
-    
-    
+
+
     /*
      * Miscellaneous
      * =========================================================================
      */
-    
-    
+
+
     /**
      * Finds the Browser name inside the user agent.
      *

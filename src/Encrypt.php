@@ -43,7 +43,7 @@ class Encrypt
         }
         return implode('@', $tmp);
     }
-    
+
     /**
      * Offsets every ASCII character from '!' to '~' by 47 bits, wrapping overflow
      *
@@ -67,7 +67,7 @@ class Encrypt
         }
         return $result;
     }
-    
+
     /**
      * Applies rot47, url encodes and wraps a string it in an element with
      * 'rot47' class. Useful to hidde data from robots.

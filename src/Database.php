@@ -26,7 +26,7 @@ abstract class Database
      * @var mysqli
      */
     public $connect;
-    
+
     /**
      * Creates a new mysqli connection
      *
@@ -56,7 +56,7 @@ abstract class Database
         }
         $this->connect->query("SET NAMES '$encode'");
     }
-    
+
     /**
      * Handles Database errors
      *
@@ -67,7 +67,7 @@ abstract class Database
      * @param mixed  $opt     Optional data for extending classes
      */
     public abstract function error($message, $opt = null);
-    
+
     /**
      * Performs a query on the database and returns the fetched result.
      *
@@ -81,7 +81,7 @@ abstract class Database
     {
         return $this->connect->query($query);
     }
-    
+
     /**
      * Prepare an SQL statement for execution,
      * Binds variables to the prepared statement as parameters,
@@ -101,28 +101,28 @@ abstract class Database
     public function prepare($query, $types, $arr)
     {
         $args = [$types];
-        
+
         // Prepare the statement
         $stmt = $this->connect->prepare($query);
-        
+
         // A hack to pass by reference
         foreach ($arr as &$v) {
             $args[] = &$v;
         }
         unset($v);
-        
+
         // Bind values
         call_user_func_array([$stmt, 'bind_param'], $args);
-        
+
         // Error handling
         if (!$stmt || !$stmt->execute() || $stmt->error !== '') {
             $this->error(!$stmt || $stmt->error == '' ? $this->connect->error : $stmt->error);
         }
-        
+
         // Ok
         return $stmt;
     }
-    
+
     /**
      * Fetches the data of a successful mysqli query
      *
