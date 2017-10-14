@@ -110,6 +110,28 @@ class Utils
         return $val;
     }
 
+    /**
+     * Checks if input contains only digits (numbers)
+     *
+     * @author Tim Boormans <info@directwebsolutions.nl>
+     * @link   http://php.net/manual/en/function.ctype-digit.php#108712
+     *
+     * @param mixed $digit
+     *
+     * @return boolean
+     */
+    public static function isDigit($digit)
+    {
+        if (is_int($digit)) {
+            return true;
+        } elseif (is_string($digit)) {
+            return ctype_digit($digit);
+        } else {
+            // booleans, floats and others
+            return false;
+        }
+    }
+
 
     /*
      * Array
