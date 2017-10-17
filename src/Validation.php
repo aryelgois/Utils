@@ -191,6 +191,30 @@ class Validation
     }
 
     /**
+     * Validates Brazilian Document (CPF or CNPJ)
+     *
+     * @param string $doc Document to be validated (11 or 14 digits, but other
+     *                    characters are ignored)
+     *
+     * @return mixed[] With keys 'type' and 'valid'
+     *
+     * @throws UnexpectedValueException If document is invalid
+     */
+    public static function document($doc)
+    {
+        $type = 1;
+        $valid = self::cpf($doc);
+        if ($valid == false) {
+            $type = 2;
+            $valid = self::cnpj($doc);
+        }
+        if ($valid == false) {
+            throw new \UnexpectedValueException('Not a valid document');
+        }
+        return ['type' => $type, 'valid' => $valid];
+    }
+
+    /**
      * Validates a telephone/cell phone number
      *
      * @param string $tel Maximum format '+00 (000) 90000-0000'

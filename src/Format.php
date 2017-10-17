@@ -135,6 +135,25 @@ class Format
     }
 
     /**
+     * Formats Brazilian Document (CPF or CNPJ)
+     *
+     * @param string  $doc     @see Validation::document()
+     * @param boolean $prepend If should prepend the document name
+     *
+     * @return string
+     */
+    public static function document($doc, $prepend = false)
+    {
+        $document = Validation::document($doc);
+        if ($document['type'] == 1) {
+            return ($prepend ? 'CPF: ' : '') . self::cpf($document['valid']);
+        } elseif ($document['type'] == 2) {
+            return ($prepend ? 'CNPJ: ' : '') . self::cnpj($document['valid']);
+        }
+        return $document['valid'];
+    }
+
+    /**
      * Formats money value based in a country code
      *
      * @param float  $val     Value to be formated
