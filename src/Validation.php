@@ -197,8 +197,7 @@ class Validation
      *                    characters are ignored)
      *
      * @return mixed[] With keys 'type' and 'valid'
-     *
-     * @throws UnexpectedValueException If document is invalid
+     * @return false   If document is invalid
      */
     public static function document($doc)
     {
@@ -209,7 +208,7 @@ class Validation
             $valid = self::cnpj($doc);
         }
         if ($valid == false) {
-            throw new \UnexpectedValueException('Not a valid document');
+            return false;
         }
         return ['type' => $type, 'valid' => $valid];
     }
