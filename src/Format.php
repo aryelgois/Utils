@@ -140,7 +140,8 @@ class Format
      * @param string  $doc     @see Validation::document()
      * @param boolean $prepend If should prepend the document name
      *
-     * @return string
+     * @return string Formatted document
+     * @return string Unformatted document if it is invalid
      */
     public static function document($doc, $prepend = false)
     {
@@ -150,7 +151,7 @@ class Format
         } elseif ($document['type'] == 2) {
             return ($prepend ? 'CNPJ: ' : '') . self::cnpj($document['valid']);
         }
-        return $document['valid'];
+        return $document['valid'] ?? $doc;
     }
 
     /**
