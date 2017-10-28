@@ -12,7 +12,7 @@ namespace aryelgois\Utils;
  *
  * @author Aryel Mota Góis
  * @license MIT
- * @link https://www.github.com/aryelgois/Utils
+ * @link https://www.github.com/aryelgois/utils
  */
 class Validation
 {
