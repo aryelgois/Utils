@@ -141,6 +141,19 @@ class Utils
 
 
     /**
+     * Returns only array entries listed in a whitelist
+     *
+     * @param array $array     Original array to operate on
+     * @param array $whitelist Keys allowed in the array
+     *
+     * @return array
+     */
+    public static function arrayWhitelist($array, $whitelist)
+    {
+        return array_intersect_key($array, array_flip($whitelist));
+    }
+
+    /**
      * Merges two or more arrays in a zipper style:
      *
      * If array length is not equal, those missing will be skipped.
