@@ -141,16 +141,16 @@ class Utils
 
 
     /**
-     * Returns only array entries listed in a whitelist
+     * Returns only array entries NOT listed in a blacklist
      *
      * @param array $array     Original array to operate on
-     * @param array $whitelist Keys allowed in the array
+     * @param array $blacklist Keys not allowed in the array
      *
      * @return array
      */
-    public static function arrayWhitelist($array, $whitelist)
+    public static function arrayBlacklist($array, $blacklist)
     {
-        return array_intersect_key($array, array_flip($whitelist));
+        return array_diff_key($array, array_flip($blacklist));
     }
 
     /**
@@ -196,6 +196,19 @@ class Utils
             }
         }
         return $result;
+    }
+
+    /**
+     * Returns only array entries listed in a whitelist
+     *
+     * @param array $array     Original array to operate on
+     * @param array $whitelist Keys allowed in the array
+     *
+     * @return array
+     */
+    public static function arrayWhitelist($array, $whitelist)
+    {
+        return array_intersect_key($array, array_flip($whitelist));
     }
 
 
