@@ -154,6 +154,27 @@ class Utils
     }
 
     /**
+     * Tests if an array has an associative key (not integer)
+     *
+     * NOTE:
+     * - Even if the keys are non sequential numeric, the array is not
+     *   considered 'associative'
+     *
+     * @param array $array An array whose keys will be tested
+     *
+     * @return boolean
+     */
+    public static function arrayIsAssoc($array)
+    {
+        foreach (array_keys($array) as $key) {
+            if (!is_int($key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Merges two or more arrays in a zipper style:
      *
      * If array length is not equal, those missing will be skipped.
