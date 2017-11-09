@@ -159,8 +159,8 @@ class Utils
      * It passes each array as the first argument, followed by all the others,
      * then it merges the results.
      *
-     * @param callable $callback A function to receive all arrays
-     * @param mixed[]  $arrays   Multiple arrays
+     * @param callable $callback  A function to receive all arrays
+     * @param mixed[]  ...$arrays Multiple arrays
      *
      * @return mixed[]
      */
@@ -246,7 +246,7 @@ class Utils
     /**
      * Computes the unique values in a set of arrays
      *
-     * @param mixed[] $arrays Multiple arrays to compare
+     * @param mixed[] ...$arrays Multiple arrays to compare
      *
      * @return mixed[]
      */
@@ -258,7 +258,7 @@ class Utils
     /**
      * Computes the unique values in a set of arrays, based on its keys
      *
-     * @param mixed[] $arrays Multiple arrays to compare
+     * @param mixed[] ...$arrays Multiple arrays to compare
      *
      * @return mixed[]
      */
