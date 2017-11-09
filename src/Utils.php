@@ -154,6 +154,30 @@ class Utils
     }
 
     /**
+     * Runs a callback in a set of arrays
+     *
+     * It passes each array as the first argument, followed by all the others,
+     * then it merges the results.
+     *
+     * @param callable $callback A function to receive all arrays
+     * @param mixed[]  $arrays   Multiple arrays
+     *
+     * @return mixed[]
+     */
+    protected static function arrayCallUserFuncEachFirst(
+        callable $callback,
+        ...$arrays
+    ) {
+        $diffs = [];
+        foreach ($arrays as $key => $array) {
+            $others = $arrays;
+            unset($others[$key]);
+            $diffs[] = call_user_func($callback, $array, ...$others);
+        }
+        return array_merge(...$diffs);
+    }
+
+    /**
      * Tests if an array has an associative key (not integer)
      *
      * NOTE:
@@ -217,6 +241,30 @@ class Utils
             }
         }
         return $result;
+    }
+
+    /**
+     * Computes the unique values in a set of arrays
+     *
+     * @param mixed[] $arrays Multiple arrays to compare
+     *
+     * @return mixed[]
+     */
+    public static function arrayUniqueDiff(...$arrays)
+    {
+        return self::arrayCallUserFuncEachFirst('array_diff', ...$arrays);
+    }
+
+    /**
+     * Computes the unique values in a set of arrays, based on its keys
+     *
+     * @param mixed[] $arrays Multiple arrays to compare
+     *
+     * @return mixed[]
+     */
+    public static function arrayUniqueDiffKey(...$arrays)
+    {
+        return self::arrayCallUserFuncEachFirst('array_diff_key', ...$arrays);
     }
 
     /**
