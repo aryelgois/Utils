@@ -244,6 +244,91 @@ class Utils
     }
 
     /**
+     * Gets the value from a nested array, following a list of keys
+     *
+     * @author ymakux
+     * @see    https://stackoverflow.com/a/44189105
+     *
+     * @param array        $array Array manipulated
+     * @param array|string $path  List of keys to follow
+     * @param string       $glue  Glue to explode the $path
+     *
+     * @return mixed
+     */
+    function arrayPathGet(array &$array, $path, $glue='.')
+    {
+       if (!is_array($path)) {
+           $path = explode($glue, $path);
+       }
+
+       $ref = &$array;
+
+       foreach ((array) $path as $parent) {
+           if (is_array($ref) && array_key_exists($parent, $ref)) {
+               $ref = &$ref[$parent];
+           } else {
+               return null;
+           }
+       }
+
+       return $ref;
+    }
+
+    /**
+     * Sets the value in a nested array, following a list of keys
+     *
+     * @author ymakux
+     * @see    https://stackoverflow.com/a/44189105
+     *
+     * @param array        $array Array manipulated
+     * @param array|string $path  List of keys to follow
+     * @param mixed        $value New value to be set
+     * @param string       $glue  Glue to explode the $path
+     */
+    function arrayPathSet(array &$array, $path, $value, $glue='.')
+    {
+       if (!is_array($path)) {
+           $path = explode($glue, (string) $path);
+       }
+
+       $ref = &$array;
+
+       foreach ($path as $parent) {
+           if (isset($ref) && !is_array($ref)) {
+               $ref = array();
+           }
+           $ref = &$ref[$parent];
+       }
+
+       $ref = $value;
+    }
+
+    /**
+     * Unsets a key value from a nested array, following a list of keys
+     *
+     * @author ymakux
+     * @see    https://stackoverflow.com/a/44189105
+     *
+     * @param array        $array Array manipulated
+     * @param array|string $path  List of keys to follow
+     * @param string       $glue  Glue to explode the $path
+     */
+    function arrayPathUnset(&$array, $path, $glue='.')
+    {
+       if (!is_array($path)) {
+           $path = explode($glue, $path);
+       }
+
+       $key = array_shift($path);
+
+       if (empty($path)) {
+           unset($array[$key]);
+       } else {
+           self::arrayPathUnset($array[$key], $path);
+       }
+    }
+
+    /**
      * Computes the unique values in a set of arrays
      *
      * @param mixed[] ...$arrays Multiple arrays to compare
