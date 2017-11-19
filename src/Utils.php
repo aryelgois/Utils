@@ -255,23 +255,23 @@ class Utils
      *
      * @return mixed
      */
-    function arrayPathGet(array &$array, $path, $glue='.')
+    public static function arrayPathGet(array &$array, $path, $glue='.')
     {
-       if (!is_array($path)) {
-           $path = explode($glue, $path);
-       }
+        if (!is_array($path)) {
+            $path = explode($glue, $path);
+        }
 
-       $ref = &$array;
+        $ref = &$array;
 
-       foreach ((array) $path as $parent) {
-           if (is_array($ref) && array_key_exists($parent, $ref)) {
-               $ref = &$ref[$parent];
-           } else {
-               return null;
-           }
-       }
+        foreach ((array) $path as $parent) {
+            if (is_array($ref) && array_key_exists($parent, $ref)) {
+                $ref = &$ref[$parent];
+            } else {
+                return null;
+            }
+        }
 
-       return $ref;
+        return $ref;
     }
 
     /**
@@ -285,22 +285,22 @@ class Utils
      * @param mixed        $value New value to be set
      * @param string       $glue  Glue to explode the $path
      */
-    function arrayPathSet(array &$array, $path, $value, $glue='.')
+    public static function arrayPathSet(array &$array, $path, $value, $glue='.')
     {
-       if (!is_array($path)) {
-           $path = explode($glue, (string) $path);
-       }
+        if (!is_array($path)) {
+            $path = explode($glue, (string) $path);
+        }
 
-       $ref = &$array;
+        $ref = &$array;
 
-       foreach ($path as $parent) {
-           if (isset($ref) && !is_array($ref)) {
-               $ref = array();
-           }
-           $ref = &$ref[$parent];
-       }
+        foreach ($path as $parent) {
+            if (isset($ref) && !is_array($ref)) {
+                $ref = array();
+            }
+            $ref = &$ref[$parent];
+        }
 
-       $ref = $value;
+        $ref = $value;
     }
 
     /**
@@ -313,19 +313,19 @@ class Utils
      * @param array|string $path  List of keys to follow
      * @param string       $glue  Glue to explode the $path
      */
-    function arrayPathUnset(&$array, $path, $glue='.')
+    public static function arrayPathUnset(&$array, $path, $glue='.')
     {
-       if (!is_array($path)) {
-           $path = explode($glue, $path);
-       }
+        if (!is_array($path)) {
+            $path = explode($glue, $path);
+        }
 
-       $key = array_shift($path);
+        $key = array_shift($path);
 
-       if (empty($path)) {
-           unset($array[$key]);
-       } else {
-           self::arrayPathUnset($array[$key], $path);
-       }
+        if (empty($path)) {
+            unset($array[$key]);
+        } else {
+            self::arrayPathUnset($array[$key], $path);
+        }
     }
 
     /**
