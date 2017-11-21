@@ -91,7 +91,7 @@ class Validation
     /**
      * Validates Brazilian CNPJ
      *
-     * @param string $cnpj 14 digits, anything else is discarded
+     * @param string $cnpj Up to 14 digits, anything else is discarded
      *
      * @return string validated (only numbers) or false if invalid
      */
@@ -101,9 +101,10 @@ class Validation
         $cnpj = preg_replace('/[^\d]/', '', $cnpj);
 
         // Check amount of numbers
-        if (strlen($cnpj) != 14) {
+        if (strlen($cnpj) > 14) {
             return false;
         }
+        $cnpj = str_pad($cnpj, 14, '0', STR_PAD_LEFT);
 
         // Calculate check digits
         $cd = [11 - self::mod11($cnpj)];
@@ -128,7 +129,7 @@ class Validation
      * @author rafael-neri (modified)
      * @link https://gist.github.com/rafael-neri/ab3e58803a08cb4def059fce4e3c0e40
      *
-     * @param string $cpf 11 digits, anything else is discarded
+     * @param string $cpf Up to 11 digits, anything else is discarded
      *
      * @return string validated (only numbers) or false if invalid
      */
@@ -138,9 +139,10 @@ class Validation
         $cpf = preg_replace('/[^\d]/', '', $cpf);
 
         // Check amount of numbers
-        if (strlen($cpf) != 11) {
+        if (strlen($cpf) > 11) {
             return false;
         }
+        $cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
 
         // Check for same digit sequence
         if (preg_match('/(\d)\1{10}/', $cpf)) {
