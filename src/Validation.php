@@ -21,7 +21,6 @@ class Validation
      * =========================================================================
      */
 
-
     /**
      * Sanitizes a string
      *
@@ -48,12 +47,10 @@ class Validation
         }
     }
 
-
     /*
      * Specific cases
      * =========================================================================
      */
-
 
     /**
      * Validates address numbers
@@ -261,12 +258,10 @@ class Validation
         return false;
     }
 
-
     /*
      * Helper
      * =========================================================================
      */
-
 
     /**
      * Luhn algorithm (modulus 10)

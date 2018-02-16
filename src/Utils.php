@@ -21,7 +21,6 @@ class Utils
      * =========================================================================
      */
 
-
     /**
      * Exports a value, wrapping in <pre><code>, and echo.
      *
@@ -32,12 +31,10 @@ class Utils
         echo "<pre><code>\n" . var_export($val, true) . "\n</code></pre>\n";
     }
 
-
     /*
      * Numbers
      * =========================================================================
      */
-
 
     /**
      * Compares if a value is between a minimum and maximum value.
@@ -133,12 +130,10 @@ class Utils
         }
     }
 
-
     /*
      * Array
      * =========================================================================
      */
-
 
     /**
      * Returns only array entries NOT listed in a blacklist
@@ -365,12 +360,10 @@ class Utils
         return array_intersect_key($array, array_flip($whitelist));
     }
 
-
     /*
      * Recursive
      * =========================================================================
      */
-
 
     /**
      * Recursively searches an array for a value.
@@ -438,12 +431,10 @@ class Utils
         return $arr;
     }
 
-
     /*
      * Miscellaneous
      * =========================================================================
      */
-
 
     /**
      * Finds the Browser name inside the user agent.
