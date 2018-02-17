@@ -9,14 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+- Changelog
+- Validation `cpfCheckDigit()`
 
 ### Changed
+- Format `naturalLanguageJoin()`
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- Package name
+- Validation `cpf()` and `cnpj()`
 
 ### Security
 
