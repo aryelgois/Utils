@@ -111,10 +111,10 @@ class Validation
 
         // Calculate check digits
         $cd = [11 - self::mod11($cnpj)];
-        $cd[] = 11 - self::mod11($cnpj . $cd[0]);
         if ($cd[0] >= 10) {
             $cd[0] = 0;
         }
+        $cd[] = 11 - self::mod11($cnpj . $cd[0]);
         if ($cd[1] >= 10) {
             $cd[1] = 0;
         }
