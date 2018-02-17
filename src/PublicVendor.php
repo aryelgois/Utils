@@ -47,9 +47,9 @@ class PublicVendor
      *
      * @param Event $event Composer Script Event
      *
-     * @throws RuntimeException If configuration file is not found
-     * @throws RuntimeException If configuration file could not be loaded
-     * @throws RuntimeException If a map uses an undefined vendor
+     * @throws \RuntimeException If configuration file is not found
+     * @throws \RuntimeException If configuration file could not be loaded
+     * @throws \RuntimeException If a map uses an undefined vendor
      */
     public static function postInstall(Event $event)
     {
