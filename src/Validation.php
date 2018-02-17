@@ -1,6 +1,6 @@
 <?php
 /**
- * This Software is part of aryelgois\Utils and is provided "as is".
+ * This Software is part of aryelgois/utils and is provided "as is".
  *
  * @see LICENSE
  */
