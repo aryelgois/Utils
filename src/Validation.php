@@ -109,18 +109,23 @@ class Validation
             return false;
         }
 
+        // Remove check digits
+        $value = substr($cnpj, 0, -2);
+
         // Calculate check digits
-        $cd = [11 - self::mod11($cnpj)];
-        if ($cd[0] >= 10) {
-            $cd[0] = 0;
+        $cd = 11 - self::mod11($value);
+        if ($cd >= 10) {
+            $cd = 0;
         }
-        $cd[] = 11 - self::mod11($cnpj . $cd[0]);
-        if ($cd[1] >= 10) {
-            $cd[1] = 0;
+        $value .= $cd;
+        $cd = 11 - self::mod11($value);
+        if ($cd >= 10) {
+            $cd = 0;
         }
+        $value .= $cd;
 
         // Verify
-        if ($cd[0] == $cnpj[12] && $cd[1] == $cnpj[13]) {
+        if ($cnpj === $value) {
             return $cnpj;
         }
         return false;
