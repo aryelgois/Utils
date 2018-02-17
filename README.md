@@ -12,6 +12,9 @@ This repository contains code snippets organized into classes for easy access
 and reuse.
 
 
+# [Changelog](CHANGELOG.md)
+
+
 # TODO
 
 - Find authors of some code snippets
