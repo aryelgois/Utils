@@ -188,7 +188,7 @@ class Validation
      * @param string $datetime Date time string
      * @param string $format   Format to be tested
      *
-     * @return [type] [...]
+     * @return boolean
      */
     public static function dateTime($datetime, $format = 'Y-m-d H:i:s')
     {
