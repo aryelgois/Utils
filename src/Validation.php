@@ -167,35 +167,6 @@ class Validation
     }
 
     /**
-     * Calculates Brazilian CPF check digits
-     *
-     * An adaptation of cpf()
-     *
-     * @todo Find a way to merge with cpf() to remove code duplication
-     *
-     * @param string $cpf Up to 9 digits, anything else is discarded
-     *
-     * @return string validated (only numbers) or false if invalid
-     */
-    public static function cpfCheckDigit($cpf)
-    {
-        // Extract numbers and pad
-        $cpf = substr(preg_replace('/[^\d]/', '', $cpf), 0, 9);
-        $cpf = str_pad($cpf, 9, '0', STR_PAD_LEFT);
-
-        // Calculate check digits
-        for ($t = 9; $t < 11; $t++) {
-            for ($d = 0, $c = 0; $c < $t; $c++) {
-                $d += $cpf{$c} * (($t + 1) - $c);
-            }
-            $d = ((10 * $d) % 11) % 10;
-            $cpf .= $d;
-        }
-
-        return $cpf;
-    }
-
-    /**
      * Validates a date
      *
      * @param string $date   Date string
