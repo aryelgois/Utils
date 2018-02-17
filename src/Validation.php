@@ -104,6 +104,11 @@ class Validation
         }
         $cnpj = str_pad($cnpj, 14, '0', STR_PAD_LEFT);
 
+        // Check for same digit sequence
+        if (preg_match('/(\d)\1{13}/', $cnpj)) {
+            return false;
+        }
+
         // Calculate check digits
         $cd = [11 - self::mod11($cnpj)];
         $cd[] = 11 - self::mod11($cnpj . $cd[0]);
