@@ -1,6 +1,6 @@
 <?php
 /**
- * This Software is part of aryelgois\Utils and is provided "as is".
+ * This Software is part of aryelgois/utils and is provided "as is".
  *
  * @see LICENSE
  */
@@ -197,18 +197,24 @@ class Format
     /**
      * Implodes an array with ',' and 'and' before last element
      *
-     * @param array  $arr Array to be imploded
-     * @param string $and Locale 'and'
+     * @param array  $pieces Array to be imploded
+     * @param string $last   String to join the last item
+     * @param string $glue   String to join the other items
      *
      * @return string
      */
-    public static function naturalLanguageJoin(array $arr, $and = 'and')
-    {
-        $last = array_pop($arr);
+    public static function naturalLanguageJoin(
+        array $arr,
+        string $last = null,
+        string $glue = null
+    ) {
+        $last_item = array_pop($arr);
         if ($arr) {
-            return implode(', ', $arr) . ' ' . $and . ' ' . $last;
+            return implode($glue ?? ', ', $arr)
+                . ' ' . ($last ?? 'and') . ' '
+                . $last_item;
         }
-        return $last;
+        return $last_item;
     }
 
     /**

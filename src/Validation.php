@@ -1,6 +1,6 @@
 <?php
 /**
- * This Software is part of aryelgois\Utils and is provided "as is".
+ * This Software is part of aryelgois/utils and is provided "as is".
  *
  * @see LICENSE
  */
@@ -20,7 +20,6 @@ class Validation
      * Clean up
      * =========================================================================
      */
-
 
     /**
      * Sanitizes a string
@@ -48,12 +47,10 @@ class Validation
         }
     }
 
-
     /*
      * Specific cases
      * =========================================================================
      */
-
 
     /**
      * Validates address numbers
@@ -76,13 +73,13 @@ class Validation
     /**
      * Validates Brazilian CEP
      *
-     * @param string $cep Format '00.000-00', can omit punctuation
+     * @param string $zipcode Format '00.000-000', can omit punctuation
      *
      * @return string validated or false on failure
      */
-    public static function cep($cep)
+    public static function cep($zipcode)
     {
-        if (preg_match("/^(\d{2})[\s\.]?(\d{3})[\s\-]?(\d{3})$/", $cep, $matches)) {
+        if (preg_match("/^(\d{2})[\s\.]?(\d{3})[\s\-]?(\d{3})$/", $zipcode, $matches)) {
             return $matches[1] . $matches[2] . '-' . $matches[3];
         }
         return false;
@@ -91,9 +88,10 @@ class Validation
     /**
      * Validates Brazilian CNPJ
      *
-     * @param string $cnpj 14 digits, anything else is discarded
+     * @param string $cnpj Up to 14 digits, anything else is discarded
      *
-     * @return string validated (only numbers) or false if invalid
+     * @return string validated (only numbers)
+     * @return false  if invalid
      */
     public static function cnpj($cnpj)
     {
@@ -101,22 +99,33 @@ class Validation
         $cnpj = preg_replace('/[^\d]/', '', $cnpj);
 
         // Check amount of numbers
-        if (strlen($cnpj) != 14) {
+        if (strlen($cnpj) > 14) {
+            return false;
+        }
+        $cnpj = str_pad($cnpj, 14, '0', STR_PAD_LEFT);
+
+        // Check for same digit sequence
+        if (preg_match('/(\d)\1{13}/', $cnpj)) {
             return false;
         }
 
+        // Remove check digits
+        $value = substr($cnpj, 0, -2);
+
         // Calculate check digits
-        $cd = [11 - self::mod11($cnpj)];
-        $cd[] = 11 - self::mod11($cnpj . $cd[0]);
-        if ($cd[0] >= 10) {
-            $cd[0] = 0;
+        $cd = 11 - self::mod11($value);
+        if ($cd >= 10) {
+            $cd = 0;
         }
-        if ($cd[1] >= 10) {
-            $cd[1] = 0;
+        $value .= $cd;
+        $cd = 11 - self::mod11($value);
+        if ($cd >= 10) {
+            $cd = 0;
         }
+        $value .= $cd;
 
         // Verify
-        if ($cd[0] == $cnpj[12] && $cd[1] == $cnpj[13]) {
+        if ($cnpj === $value) {
             return $cnpj;
         }
         return false;
@@ -128,7 +137,7 @@ class Validation
      * @author rafael-neri (modified)
      * @link https://gist.github.com/rafael-neri/ab3e58803a08cb4def059fce4e3c0e40
      *
-     * @param string $cpf 11 digits, anything else is discarded
+     * @param string $cpf Up to 11 digits, anything else is discarded
      *
      * @return string validated (only numbers) or false if invalid
      */
@@ -138,11 +147,12 @@ class Validation
         $cpf = preg_replace('/[^\d]/', '', $cpf);
 
         // Check amount of numbers
-        if (strlen($cpf) != 11) {
+        if (strlen($cpf) > 11) {
             return false;
         }
+        $cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
 
-        // Check for digit sequence
+        // Check for same digit sequence
         if (preg_match('/(\d)\1{10}/', $cpf)) {
             return false;
         }
@@ -183,7 +193,7 @@ class Validation
      * @param string $datetime Date time string
      * @param string $format   Format to be tested
      *
-     * @return [type] [...]
+     * @return boolean
      */
     public static function dateTime($datetime, $format = 'Y-m-d H:i:s')
     {
@@ -193,8 +203,8 @@ class Validation
     /**
      * Validates Brazilian Document (CPF or CNPJ)
      *
-     * @param string $doc Document to be validated (11 or 14 digits, but other
-     *                    characters are ignored)
+     * @param string $doc Document to be validated (11 or 14 digits, other
+     *                    characters are discarded)
      *
      * @return mixed[] With keys 'type' and 'valid'
      * @return false   If document is invalid
@@ -230,12 +240,10 @@ class Validation
         return false;
     }
 
-
     /*
      * Helper
      * =========================================================================
      */
-
 
     /**
      * Luhn algorithm (modulus 10)
