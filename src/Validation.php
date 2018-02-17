@@ -90,7 +90,8 @@ class Validation
      *
      * @param string $cnpj Up to 14 digits, anything else is discarded
      *
-     * @return string validated (only numbers) or false if invalid
+     * @return string validated (only numbers)
+     * @return false  if invalid
      */
     public static function cnpj($cnpj)
     {
@@ -221,8 +222,8 @@ class Validation
     /**
      * Validates Brazilian Document (CPF or CNPJ)
      *
-     * @param string $doc Document to be validated (11 or 14 digits, but other
-     *                    characters are ignored)
+     * @param string $doc Document to be validated (11 or 14 digits, other
+     *                    characters are discarded)
      *
      * @return mixed[] With keys 'type' and 'valid'
      * @return false   If document is invalid
