@@ -73,13 +73,13 @@ class Validation
     /**
      * Validates Brazilian CEP
      *
-     * @param string $cep Format '00.000-00', can omit punctuation
+     * @param string $zipcode Format '00.000-000', can omit punctuation
      *
      * @return string validated or false on failure
      */
-    public static function cep($cep)
+    public static function cep($zipcode)
     {
-        if (preg_match("/^(\d{2})[\s\.]?(\d{3})[\s\-]?(\d{3})$/", $cep, $matches)) {
+        if (preg_match("/^(\d{2})[\s\.]?(\d{3})[\s\-]?(\d{3})$/", $zipcode, $matches)) {
             return $matches[1] . $matches[2] . '-' . $matches[3];
         }
         return false;
