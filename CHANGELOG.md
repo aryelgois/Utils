@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+- Class [HttpResponse]
 
 ### Changed
 
@@ -69,3 +70,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [0.2.1]: https://github.com/aryelgois/utils/compare/v0.2...v0.2.1
 [0.2]: https://github.com/aryelgois/utils/compare/v0.1...v0.2
 [0.1]: https://github.com/aryelgois/utils/compare/0f8027cfd83300abdc2a944364c33afd0e9d6e7e...v0.1
+
+[HttpResponse]: https://gist.github.com/aryelgois/e577aa73ebbe1463532ab8a584e3d16c
