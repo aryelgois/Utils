@@ -5,6 +5,8 @@
  * @link https://opensource.org/licenses/MIT
  */
 
+namespace aryelgois\Utils;
+
 /**
  * Provides named constants for HTTP protocol status codes and their messages
  *
