@@ -157,7 +157,7 @@ class Format
     /**
      * Formats money value based in a country code
      *
-     * @param float  $val     Value to be formated
+     * @param float  $val     Value to be formatted
      * @param string $country Country whose money conventions will be used
      *
      * @return string
