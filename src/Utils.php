@@ -437,6 +437,43 @@ class Utils
      */
 
     /**
+     * Checks if data has already been output
+     *
+     * Use case: when wanting to output data, check if something was already
+     * sent, to not corrupt the response
+     *
+     * NOTE:
+     * - Copied from FPDF, modified to suit my needs
+     *
+     * @author Olivier PLATHEY
+     * @author Aryel Mota Góis
+     * @license FPDF
+     * @link http://www.fpdf.org
+     *
+     * @param string $type File type desired to send, just composes the error
+     *                     message
+     *
+     * @throws \Exception If some data has already been output
+     */
+    public static function checkOutput(string $type = null)
+    {
+        $message = "Some data has already been output, can't send "
+            . ($type === null) ? 'data' : "$type file";
+        if (PHP_SAPI != 'cli' && headers_sent($file, $line)) {
+            throw new \Exception($message . " (output started at $file:$line)");
+        }
+        if (ob_get_length()) {
+            // The output buffer is not empty
+            if (preg_match('/^(\xEF\xBB\xBF)?\s*$/', ob_get_contents())) {
+                // It contains only a UTF-8 BOM and/or whitespace
+                ob_clean();
+            } else {
+                throw new \Exception($message);
+            }
+        }
+    }
+
+    /**
      * Finds the Browser name inside the user agent.
      *
      * @return string Browser name|'Other'
