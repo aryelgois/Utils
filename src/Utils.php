@@ -458,7 +458,7 @@ class Utils
     public static function checkOutput(string $type = null)
     {
         $message = "Some data has already been output, can't send "
-            . ($type === null) ? 'data' : "$type file";
+            . ($type == '' ? 'data' : "$type file");
         if (PHP_SAPI != 'cli' && headers_sent($file, $line)) {
             throw new \Exception($message . " (output started at $file:$line)");
         }
