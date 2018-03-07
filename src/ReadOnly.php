@@ -80,10 +80,15 @@ class ReadOnly
     /**
      * Returns all stored data
      *
+     * It includes missing optional keys as null
+     *
      * @return mixed[]
      */
     public function dump()
     {
-        return $this->data;
+        return array_merge(
+            array_fill_keys(static::OPTIONAL, null),
+            $this->data
+        );
     }
 }
