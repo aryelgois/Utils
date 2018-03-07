@@ -13,6 +13,8 @@ namespace aryelgois\Utils;
  * All data is passed to __construct() in an array and accessed as a normal
  * object
  *
+ * Constants are intended to be changed by children classes
+ *
  * @author Aryel Mota Góis
  * @license MIT
  * @link https://www.github.com/aryelgois/utils
@@ -20,9 +22,20 @@ namespace aryelgois\Utils;
 class ReadOnly
 {
     /**
+     * List of acceptable keys and their types
+     *
+     * If empty, __construct() accepts any key and value
+     *
+     * The value can be a string or an array of PHP types
+     *
+     * @var mixed[]
+     */
+    const KEYS = [];
+
+    /**
      * List of keys that may not be set during __construct()
      *
-     * Intended to be used by children classes
+     * They can also be set as null
      *
      * @var string[]
      */
@@ -39,10 +52,42 @@ class ReadOnly
      * Creates a new ReadOnly object
      *
      * @param array $data All data to be stored in the object
+     *
+     * @throws \DomainException          If key is invalid
+     * @throws \InvalidArgumentException If value has invalid type
      */
     public function __construct(array $data)
     {
-        $this->data = $data;
+        $result = [];
+
+        if (empty(static::KEYS)) {
+            $result = $data;
+        } else {
+            $invalid = array_diff_key($data, static::KEYS);
+            if (!empty($invalid)) {
+                $message = 'Invalid key' . (count($invalid) > 1 ? 's' : '')
+                    . ": '" . implode("', '", $invalid) . "'";
+                throw new \DomainException($message);
+            }
+            foreach ($data as $key => $value) {
+                $type = gettype($value);
+                $expected = (array) static::KEYS[$key];
+                if (!($type === 'NULL' && in_array($key, static::OPTIONAL))
+                    && !in_array($type, $expected)
+                ) {
+                    throw new \InvalidArgumentException(sprintf(
+                        "Key '%s' in Argument 1 passed to %s() must be of the type %s, %s given",
+                        $key,
+                        __METHOD__,
+                        Format::naturalLanguageJoin($expected, 'or'),
+                        $type
+                    ));
+                }
+                $result[$key] = $value;
+            }
+        }
+
+        $this->data = $result;
     }
 
     /**
