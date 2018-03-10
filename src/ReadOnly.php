@@ -66,7 +66,7 @@ class ReadOnly
             $invalid = array_diff_key($data, static::KEYS);
             if (!empty($invalid)) {
                 $message = 'Invalid key' . (count($invalid) > 1 ? 's' : '')
-                    . ": '" . implode("', '", $invalid) . "'";
+                    . ": '" . implode("', '", array_keys($invalid)) . "'";
                 throw new \DomainException($message);
             }
             foreach ($data as $key => $value) {
