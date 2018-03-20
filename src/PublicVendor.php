@@ -70,8 +70,8 @@ class PublicVendor
             foreach ($config['map'] as $map) {
                 if (array_key_exists($map['vendor'], $config['vendors'])) {
                     $destiny = $base_dir . '/'
-                             . $config['vendors'][$map['vendor']] . '/'
-                             . trim($map['destiny'], '/');
+                        . $config['vendors'][$map['vendor']] . '/'
+                        . trim($map['destiny'], '/');
                     $source = $vendor_dir . '/' . trim($map['source'], '/');
                     if (!file_exists(dirname($destiny))) {
                         mkdir(dirname($destiny), 0755, true);

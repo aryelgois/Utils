@@ -234,8 +234,8 @@ class Validation
     {
         if (preg_match("/^(\+\d{2}|)\s?(\(?0?\d{2}\)?|)\s?(9?)\s?(\d{4})[\s\-]?(\d{4})$/", $tel, $matches)) {
             return ($matches[1] !== '' ? $matches[1] . ' ' : '')
-                 . ($matches[2] !== '' ? implode('', array_diff(str_split($matches[2]), ['(',')'])) . ' ' : '')
-                 . $matches[3]. $matches[4] . '-' . $matches[5];
+                . ($matches[2] !== '' ? implode('', array_diff(str_split($matches[2]), ['(',')'])) . ' ' : '')
+                . $matches[3]. $matches[4] . '-' . $matches[5];
         }
         return false;
     }
