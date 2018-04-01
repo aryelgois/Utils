@@ -8,7 +8,7 @@
 namespace aryelgois\Utils;
 
 /**
- * Formating functions
+ * Formatting functions
  *
  * @author Aryel Mota Góis
  * @license MIT
