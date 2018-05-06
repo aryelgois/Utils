@@ -213,11 +213,11 @@ class Validation
     {
         $type = 1;
         $valid = self::cpf($doc);
-        if ($valid == false) {
+        if ($valid === false) {
             $type = 2;
             $valid = self::cnpj($doc);
         }
-        if ($valid == false) {
+        if ($valid === false) {
             return false;
         }
         return ['type' => $type, 'valid' => $valid];

@@ -146,9 +146,9 @@ class Format
     public static function document($doc, $prepend = false)
     {
         $document = Validation::document($doc);
-        if ($document['type'] == 1) {
+        if ($document['type'] === 1) {
             return ($prepend ? 'CPF: ' : '') . self::cpf($document['valid']);
-        } elseif ($document['type'] == 2) {
+        } elseif ($document['type'] === 2) {
             return ($prepend ? 'CNPJ: ' : '') . self::cnpj($document['valid']);
         }
         return $document['valid'] ?? $doc;

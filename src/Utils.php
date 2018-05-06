@@ -214,7 +214,7 @@ class Utils
      */
     public static function arrayInterpolate(...$arrays)
     {
-        if (count($arrays) == 0) {
+        if (count($arrays) === 0) {
             return [];
         }
         $len = $result = [];
@@ -420,7 +420,7 @@ class Utils
     {
         $arr = [];
         foreach (scandir($directory) as $f) {
-            if ($f == '.' || $f == '..') {
+            if ($f === '.' || $f === '..') {
                 continue;
             } elseif (is_dir($directory . '/' . $f)) {
                 $arr[$f] = self::recScandir($directory . '/' . $f);
@@ -459,7 +459,7 @@ class Utils
     {
         $message = "Some data has already been output, can't send "
             . ($type == '' ? 'data' : "$type file");
-        if (PHP_SAPI != 'cli' && headers_sent($file, $line)) {
+        if (PHP_SAPI !== 'cli' && headers_sent($file, $line)) {
             throw new \Exception($message . " (output started at $file:$line)");
         }
         if (ob_get_length()) {
